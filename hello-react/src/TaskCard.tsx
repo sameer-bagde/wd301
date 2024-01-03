@@ -8,7 +8,7 @@ const TaskCard = (props) => {
   return (
     <div className="TaskItem">
       <h3>{props.title}</h3>
-      <p>Due Date: {props.dueDate}</p>
+      <p>Due on: {props.dueDate}</p>
       <p>Assignee: {props.assigneeName}</p>
     </div>
   );
