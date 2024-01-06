@@ -9,9 +9,7 @@ interface TaskFormState {
   title: string;
   duedate: string;
   description: string;
-  tasks: TaskItem[];
 }
-
 class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
   constructor(props: TaskFormProps) {
     super(props);
@@ -19,115 +17,84 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
       title: "",
       duedate: "",
       description: "",
-      tasks: [], // Store tasks
     };
   }
 
-  addTask = (event: React.FormEvent<HTMLFormElement>): void => {
+  addTask: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-
-    const { title, duedate, description } = this.state;
-
-    if (title.trim() !== "" && duedate.trim() !== "") {
-      const newTask: TaskItem = {
-        title,
-        duedate,
-        description,
-      };
-
-      this.props.addTask(newTask);
-
-      // Update tasks in state
-      this.setState((prevState) => ({
-        tasks: [...prevState.tasks, newTask],
-        title: "",
-        duedate: "",
-        description: "",
-      }));
-    } else {
-      alert("Title and Due Date are required fields!");
-    }
+    const newTask = {
+      title: this.state.title,
+      duedate: this.state.duedate,
+      description: this.state.description,
+    };
+    this.props.addTask(newTask);
+    this.setState({ title: "" });
+    this.setState({ duedate: "" });
+    this.setState({ description: "" });
   };
 
-  titleChanged: React.ChangeEventHandler<HTMLInputElement> = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  titleChanged: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    console.log(`${event.target.value}`);
     this.setState({ title: event.target.value });
   };
-
-  duedateChanged: React.ChangeEventHandler<HTMLInputElement> = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  duedateChanged: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    console.log(`${event.target.value}`);
     this.setState({ duedate: event.target.value });
   };
-
-  descriptionChanged: React.ChangeEventHandler<HTMLInputElement> = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  descriptionChanged: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    console.log(`${event.target.value}`);
     this.setState({ description: event.target.value });
   };
+  inputRef = React.createRef<HTMLInputElement>();
 
   render() {
-    const { tasks } = this.state;
-
     return (
-      <div>
-        {/* Display existing tasks */}
-        {tasks.map((task, index) => (
-          <div key={index} className="TaskItem">
-            <p>Title: {task.title}</p>
-            <p>Due Date: {task.duedate}</p>
-            <p>Description: {task.description}</p>
-          </div>
-        ))}
+      <form onSubmit={this.addTask}>
+        <label htmlFor="title" className="TaskItem">
+          Title:
+        </label>
+        <input
+          id="todoTitle"
+          type="text"
+          className="border border-black rounded mb-2"
+          value={this.state.title}
+          onChange={this.titleChanged}
+          required
+        />
+        <br />
 
-        {/* Form for adding tasks */}
-        <form onSubmit={this.addTask}>
-          <label htmlFor="todoTitle" className="TaskItem">
-            Title:
-          </label>
-          <input
-            id="todoTitle"
-            placeholder="Enter the title"
-            type="text"
-            value={this.state.title}
-            onChange={this.titleChanged}
-            required
-          />
-          <br />
-
-          <label htmlFor="todoDueDate" className="TaskItem">
-            Due Date:
-          </label>
-          <input
-            id="todoDueDate"
-            placeholder="Enter the due date"
-            type="text"
-            value={this.state.duedate}
-            onChange={this.duedateChanged}
-            required
-          />
-          <br />
-
-          <label htmlFor="todoDescription" className="TaskItem">
-            Description:
-          </label>
-          <input
-            id="todoDescription"
-            placeholder="Enter the description"
-            type="text"
-            value={this.state.description}
-            onChange={this.descriptionChanged}
-          />
-          <br />
-
-          <button id="addTaskButton" type="submit">
-            Add item
-          </button>
-        </form>
-      </div>
+        <label htmlFor="duedate" className="TaskItem">
+          Due Date:
+        </label>
+        <input
+          id="todoDueDate"
+          type="date"
+          className="border border-black rounded mb-2"
+          value={this.state.duedate}
+          onChange={this.duedateChanged}
+          required
+        />
+        <br />
+        <label htmlFor="description" className="TaskItem">
+          Desciption:
+        </label>
+        <input
+          id="todoDescription"
+          type="text"
+          className="border border-black rounded mb-2"
+          value={this.state.description}
+          onChange={this.descriptionChanged}
+        />
+        <br />
+        <button
+          id="addTaskButton"
+          className="TaskItem rounded bg-green"
+          type="submit"
+        >
+          Add item
+        </button>
+      </form>
     );
   }
 }
-
 export default TaskForm;

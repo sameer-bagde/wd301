@@ -15,6 +15,17 @@ class TaskApp extends React.Component<TaskAppProp, TaskAppState> {
   }
 
   addTask = (task: TaskItem) => {
+    if (!task.title) {
+      alert("Title requried!");
+      return;
+    }
+    if (!task.duedate) {
+      alert("Due Date required!");
+      return;
+    }
+    if (!task.description) {
+      task.description = "No description provided!";
+    }
     this.setState((state) => {
       return {
         tasks: [...state.tasks, task],
