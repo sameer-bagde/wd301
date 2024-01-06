@@ -24,7 +24,7 @@ class TaskApp extends React.Component<TaskAppProp, TaskAppState> {
       return;
     }
     if (!task.description) {
-      task.description = "No description provided!";
+      task.description = "Description Not Provided!";
     }
     this.setState((state) => {
       return {
