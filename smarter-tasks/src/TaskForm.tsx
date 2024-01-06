@@ -50,49 +50,42 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
   render() {
     return (
       <form onSubmit={this.addTask}>
-        <label htmlFor="title">
-          Title:
-        </label>
-        <input
-          id="todoTitle"
-          type="text"
-          className="border border-black rounded mb-2"
-          value={this.state.title}
-          onChange={this.titleChanged}
-          required
-        />
-        <br />
+        <div>
+          <label htmlFor="title">Title:</label>
+          <input
+            id="todoTitle"
+            type="text"
+            className="border border-black rounded mb-2"
+            value={this.state.title}
+            onChange={this.titleChanged}
+            required
+          />
+          <br />
 
-        <label htmlFor="duedate" >
-          Due Date:
-        </label>
-        <input
-          id="todoDueDate"
-          type="date"
-          className="border border-black rounded mb-2"
-          value={this.state.duedate}
-          onChange={this.duedateChanged}
-          required
-        />
-        <br />
-        <label htmlFor="description">
-          Desciption:
-        </label>
-        <input
-          id="todoDescription"
-          type="text"
-          className="border border-black rounded mb-2"
-          value={this.state.description}
-          onChange={this.descriptionChanged}
-        />
-        <br />
-        <button
-          id="addTaskButton"
-          className="TaskItem"
-          type="submit"
-        >
-          Add item
-        </button>
+          <label htmlFor="duedate">Due Date:</label>
+          <input
+            id="todoDueDate"
+            type="date"
+            className="border border-black rounded mb-2"
+            value={this.state.duedate}
+            onChange={this.duedateChanged}
+            required
+          />
+          <br />
+          <label htmlFor="description">Desciption:</label>
+          <input
+            id="todoDescription"
+            type="text"
+            className=" border border-black rounded mb-2"
+            value={this.state.description}
+            onChange={this.descriptionChanged}
+            required
+          />
+          <br />
+          <button id="addTaskButton" type="submit" className="TaskItem">
+            Add item
+          </button>
+        </div>
       </form>
     );
   }
