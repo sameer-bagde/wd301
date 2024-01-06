@@ -28,9 +28,8 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
       description: this.state.description,
     };
     this.props.addTask(newTask);
-    this.setState({ title: "" });
-    this.setState({ duedate: "" });
-    this.setState({ description: "" });
+    this.setState({ title: "", duedate: "" , description: ""});
+
   };
 
   titleChanged: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -82,7 +81,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
             required
           />
           <br />
-          <button id="addTaskButton" type="submit" className="TaskItem">
+          <button id="addTaskButton" type="submit">
             Add item
           </button>
         </div>
