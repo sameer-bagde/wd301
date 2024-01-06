@@ -28,9 +28,9 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
       description: this.state.duedate,
     };
     this.props.addTask(newTask);
-    this.setState({ title: "" });
-    this.setState({ duedate: "" });
-    this.setState({ title: "" });
+    this.setState({ title: ""});
+    this.setState({ duedate: ""});
+    this.setState({ title: ""});
   };
 
   titleChanged: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -45,7 +45,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
     console.log(`${event.target.value}`);
     this.setState({ description: event.target.value });
   };
-  inputRef = React.createRef<HTMLInputElement>();
+  // inputRef = React.createRef<HTMLInputElement>();
 
   render() {
     return (
@@ -55,6 +55,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
         </label>
         <input
           id="todoTitle"
+          placeholder="Enter the title"
           type="text"
           value={this.state.title}
           onChange={this.titleChanged}
@@ -67,6 +68,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
         </label>
         <input
           id="todoDueDate"
+          placeholder="Enter the due date"
           type="text"
           value={this.state.duedate}
           onChange={this.duedateChanged}
@@ -78,6 +80,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
         </label>
         <input
           id="todoDescription"
+          placeholder="Enter the description"
           type="text"
           value={this.state.description}
           onChange={this.descriptionChanged}
