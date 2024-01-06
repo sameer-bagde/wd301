@@ -5,8 +5,8 @@ interface Props {
 }
 interface TaskItem {
   title: string;
-  description: string;
   duedate: string;
+  description: string;
 }
 interface State {}
 class TaskList extends React.Component<Props, State> {

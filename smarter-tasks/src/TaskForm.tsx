@@ -7,16 +7,16 @@ interface TaskFormProps {
 
 interface TaskFormState {
   title: string;
-  description: string;
   duedate: string;
+  description: string;
 }
 class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
   constructor(props: TaskFormProps) {
     super(props);
     this.state = {
       title: "",
-      description: "",
       duedate: "",
+      description: "",
     };
   }
 
@@ -30,8 +30,8 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
     this.props.addTask(newTask);
     this.setState({
       title: "",
-      description: "",
       duedate: "",
+      description: "",
     });
   };
 
