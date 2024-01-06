@@ -10,6 +10,7 @@ interface TaskFormState {
   duedate: string;
   description: string;
 }
+
 class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
   constructor(props: TaskFormProps) {
     super(props);
@@ -35,24 +36,28 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
     });
   };
 
-  titleChanged: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    console.log(`${event.target.value}`);
+  titleChanged: React.ChangeEventHandler<HTMLInputElement> = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     this.setState({ title: event.target.value });
   };
-  duedateChanged: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    console.log(`${event.target.value}`);
+
+  duedateChanged: React.ChangeEventHandler<HTMLInputElement> = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     this.setState({ duedate: event.target.value });
   };
-  descriptionChanged: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    console.log(`${event.target.value}`);
+
+  descriptionChanged: React.ChangeEventHandler<HTMLInputElement> = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     this.setState({ description: event.target.value });
   };
-  // inputRef = React.createRef<HTMLInputElement>();
 
   render() {
     return (
       <form onSubmit={this.addTask}>
-        <label htmlFor="title" className="TaskItem">
+        <label htmlFor="todoTitle" className="TaskItem">
           Title:
         </label>
         <input
@@ -65,7 +70,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
         />
         <br />
 
-        <label htmlFor="duedate" className="TaskItem">
+        <label htmlFor="todoDueDate" className="TaskItem">
           Due Date:
         </label>
         <input
@@ -77,8 +82,9 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
           required
         />
         <br />
-        <label htmlFor="description" className="TaskItem">
-          Desciption:
+
+        <label htmlFor="todoDescription" className="TaskItem">
+          Description:
         </label>
         <input
           id="todoDescription"
@@ -88,6 +94,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
           onChange={this.descriptionChanged}
         />
         <br />
+
         <button id="addTaskButton" type="submit">
           Add item
         </button>
@@ -95,4 +102,5 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
     );
   }
 }
+
 export default TaskForm;
