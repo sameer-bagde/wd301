@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid"; // Import uuid
+
 import { TaskItem } from "./types";
 
 interface TaskFormProps {
   addTask: (task: TaskItem) => void;
 }
 
-interface TaskFormState {
-  title: string;
-  duedate: string;
-  description: string;
-}
-const TaskForm = (props: TaskFormProps) => {
-  const [formState, setFormState] = React.useState<TaskFormState>({
+const TaskForm: React.FC<TaskFormProps> = (props: TaskFormProps) => {
+  const [formState, setFormState] = useState<TaskItem>({
+    id: uuidv4(), // Use uuid to generate a unique ID
     title: "",
     description: "",
     duedate: "",
@@ -19,30 +17,38 @@ const TaskForm = (props: TaskFormProps) => {
 
   const addTask: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    console.log(`Submitted the form with`);
-    if (formState.title.length === 0 || formState.duedate.length === 0) {
-      return;
+
+    const newTask: TaskItem = {
+      ...formState,
+    };
+
+    if (newTask.title.trim() !== "" && newTask.duedate?.trim() !== "") {
+      props.addTask(newTask);
+      setFormState({
+        id: uuidv4(), // Generate a new unique ID for the next task
+        title: "",
+        description: "",
+        duedate: "",
+      });
     }
-    props.addTask(formState);
-    setFormState({ title: "", description: "", duedate: "" });
   };
 
   const titleChanged: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    console.log(`${event.target.value}`);
     setFormState({ ...formState, title: event.target.value });
   };
+
   const descriptionChanged: React.ChangeEventHandler<HTMLInputElement> = (
     event,
   ) => {
-    console.log(`${event.target.value}`);
     setFormState({ ...formState, description: event.target.value });
   };
+
   const dueDateChanged: React.ChangeEventHandler<HTMLInputElement> = (
     event,
   ) => {
-    console.log(`${event.target.value}`);
     setFormState({ ...formState, duedate: event.target.value });
   };
+
   return (
     <form onSubmit={addTask}>
       <div className="grid md:grid-cols-4 md:gap-3">

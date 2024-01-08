@@ -4,22 +4,16 @@ import { TaskItem } from "./types";
 
 interface TaskListProps {
   tasks: TaskItem[];
-  onDeleteTask: (index: number) => void;
+  onDeleteTask: (id: number) => void;
 }
 
 const TaskList: React.FC<TaskListProps> = ({ tasks, onDeleteTask }) => {
-  const handleDelete = (index: number) => {
-    onDeleteTask(index);
+  const handleDelete = (id: number) => {
+    onDeleteTask(id);
   };
 
   const list = tasks.map((task, idx) => (
-    <Task
-      key={idx}
-      title={task.title}
-      description={task.description}
-      duedate={task.duedate}
-      onDelete={() => handleDelete(idx)}
-    />
+    <Task key={idx} item={task} removeTask={() => handleDelete(idx)} />
   ));
 
   return <>{list}</>;
